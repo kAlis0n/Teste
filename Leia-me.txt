@@ -1,0 +1,60 @@
+========================================================================
+                      PROJETO SKYNETZ - FALE MAIS
+========================================================================
+
+Este repositório contém duas versões do sistema de cálculo de tarifas do 
+plano "FaleMais" da Skynetz. A mesma lógica matemática de regras de negócio 
+foi implementada em duas arquiteturas e tecnologias distintas para fins de 
+estudo, evolução e demonstração técnica.
+
+------------------------------------------------------------------------
+1. ESTRUTURA DOS SISTEMAS
+------------------------------------------------------------------------
+
+* VERSÃO 1: Windows Forms (WinForms)
+  - Aplicação clássica Desktop desenvolvida inteiramente de forma autônoma.
+  - O cálculo é processado localmente no próprio formulário.
+
+* VERSÃO 2: Web (ASP.NET Core MVC)
+  - Mudança de arquitetura convertendo o sistema para uma plataforma web moderna.
+  - Por não possuir muita experiência prévia com o ambiente de desenvolvimento
+    web (HTML, JavaScript e o padrão de Controladores do MVC), foi utilizado 
+    o auxílio de uma Inteligência Artificial para guiar a montagem da estrutura 
+    da interface e dos scripts de automação da tela. Toda a lógica matemática 
+    e as regras de negócio originais criadas no WinForms foram mantidas e 
+    reaproveitadas integralmente no backend C#.
+
+------------------------------------------------------------------------
+2. COMO OS SISTEMAS FUNCIONAM (REGRAS DE NEGÓCIO)
+------------------------------------------------------------------------
+
+Ambos os sistemas têm a mesma finalidade: calcular e comparar o valor de 
+uma ligação telefônica com e sem o plano "FaleMais".
+
+O cálculo funciona com base nas seguintes entradas informadas pelo usuário:
+1. Origem e Destino (DDD): Define o valor da tarifa padrão por minuto.
+2. Tempo da ligação: Quantidade de minutos consumidos.
+3. Plano FaleMais: Define a franquia de minutos livres (30, 60 ou 120 min).
+
+Comportamento do cálculo:
+* Sem FaleMais: O valor é simplesmente a multiplicação direta de [Minutos x Tarifa].
+* Com FaleMais: Se a ligação estiver dentro do limite da franquia do plano escolhido, 
+  o custo é zero. Caso o tempo ultrapasse a franquia, é cobrado o valor dos minutos 
+  excedentes com um acréscimo de 10% sobre a tarifa padrão.
+
+------------------------------------------------------------------------
+3. COMO UTILIZAR OS SISTEMAS
+------------------------------------------------------------------------
+
+Ambos os sistemas foram projetados para serem dinâmicos e fluidos:
+
+1. Selecione a região de "Origem e Destino" na caixa de seleção.
+2. Digite o "Tempo (Minutos)" da ligação na caixa de texto.
+3. Selecione o "Plano FaleMais" desejado.
+
+*Nota de Uso:* Graças à implementação de eventos dinâmicos (no WinForms) e de
+scripts automatizados (na Web), NÃO é necessário clicar em nenhum botão para 
+ver o resultado. Os valores dos campos "Com FaleMais" e "Sem FaleMais" são 
+atualizados e calculados instantaneamente na tela à medida que você altera 
+os dados ou digita o tempo da ligação.
+========================================================================
