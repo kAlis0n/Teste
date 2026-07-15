@@ -1,0 +1,65 @@
+﻿@model Skynetz.Models.Calculo
+
+@{
+    ViewData["Title"] = "Planos";
+}
+
+<div class="text-center my-4">
+    <h1 class="display-4 fw-bold text-primary">Skynetz</h1>
+    <h3>Escolha seu Plano</h3>
+    <p class="text-muted">Tudo estará sendo calculado por minutos!</p>
+</div>
+
+<div class="container" style="max-width: 600px;">
+    <form id="meuFormulario" asp-action="Index" method="post" class="card p-4 shadow-sm bg-light">
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Origem e Destino</label>
+            <select asp-for="DDDsSelecionado" class="form-select" onchange="dispararCalculo()"
+                    asp-items="@(new SelectList(Model.Tarifas, "DDDs", "DDDs"))">
+                <option value="">Selecione a Região...</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-bold">Tempo (Minutos)</label>
+            <input asp-for="Minutos" type="number" min="0" class="form-control" placeholder="Digite os minutos..."
+                   oninput="dispararCalculo()" autofocus onfocus="var temp_value=this.value; this.value=''; this.value=temp_value" />
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label fw-bold">Plano FaleMais</label>
+            <select asp-for="PlanoSelecionado" class="form-select" onchange="dispararCalculo()"
+                    asp-items="@(new SelectList(Model.Planos, "Franquia", "Planos"))">
+                <option value="">Selecione o Plano...</option>
+            </select>
+        </div>
+
+        <hr />
+
+        <div class="row text-center mt-3">
+            <div class="col-6">
+                <label class="fw-bold text-success d-block">Com FaleMais</label>
+                <div class="form-control bg-white fw-bold text-success">
+                    @Model.CustoComPlano.ToString("C2")
+                </div>
+            </div>
+            <div class="col-6">
+                <label class="fw-bold text-secondary d-block">Sem FaleMais</label>
+                <div class="form-control bg-white fw-bold">
+                    @Model.CustoSemPlano.ToString("C2")
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        function dispararCalculo() {
+            // Envia o formulário para o C# calcular de forma automática
+            document.getElementById("meuFormulario").submit();
+        }
+    </script>
+}
